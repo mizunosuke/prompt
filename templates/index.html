@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+  <title>カスタマーサポートAIデモサイト</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <link
+    rel="shortcut icon"
+    href="{{ url_for('static', filename='hatena.svg') }}"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+
+<body>
+  <header class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-wrap px-24 py-2 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg> -->
+        <span class="ml-3 text-xl">会社サイト</span>
+      </a>
+      <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+        <a class="mr-5 hover:text-gray-900">Home</a>
+        <a class="mr-5 hover:text-gray-900">About</a>
+        <a class="mr-5 hover:text-gray-900">よくある質問</a>
+        <!-- <a class="mr-5 hover:text-gray-900">Fourth Link</a> -->
+      </nav>
+
+    </div>
+  </header>
+
+
+  <section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-2 mx-auto">
+      <div class="flex flex-col text-center w-full mb-4">
+        <h1 class="sm:text-3xl text-2xl font-bold title-font mb-4 text-[#0052CC]">カスタマーサポートAI</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-sm">質問を入力してください。<br>FAQに登録されている内容に基づいてAIが回答します。</p>
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+          <div class="container mx-auto flex flex-wrap">
+            <input class="text-xs sm:text-sm text-center rounded-full border-2 border-gray-300 py-1 px-2 mx-2 my-2 hover:bg-gray-100 text-gray-600 font-bold" type="button" value="パスワードがわかりません" onclick="add1()">
+            <input class="text-xs sm:text-sm text-center rounded-full border-2 border-gray-300 py-1 px-2 mx-2 my-2 hover:bg-gray-100 text-gray-600 font-bold" type="button" value="配送された商品の大きさが違っていました。返品できますか？" onclick="add2()">
+            <input class="text-xs sm:text-sm text-center rounded-full border-2 border-gray-300 py-1 px-2 mx-2 my-2 hover:bg-gray-100 text-gray-600 font-bold" type="button" value="商品が届きません！" onclick="add3()">
+            <input class="text-xs sm:text-sm text-center rounded-full border-2 border-gray-300 py-1 px-2 mx-2 my-2 hover:bg-gray-100 text-gray-600 font-bold" type="button" value="商品のラッピングについてききたいです" onclick="add4()">
+            <input class="text-xs sm:text-sm text-center rounded-full border-2 border-gray-300 py-1 px-2 mx-2 my-2 hover:bg-gray-100 text-gray-600 font-bold" type="button" value="メールが届きません" onclick="add5()">
+          </div>
+        </div>
+        
+      </div>
+      <div class="lg:w-1/2 md:w-2/3 mx-auto">
+        <div class="flex flex-wrap -m-2">
+          <div class="px-6 w-full">
+            <div class="relative">
+              <form id="animal-form">
+                <textarea id="message" name="animal" class="w-full bg-white bg-opacity-50 rounded border border-gray-300 focus:border-[#0052CC] focus:bg-white focus:ring-2 focus:ring-indigo-200 h-24 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out" required></textarea>
+                <button class="mt-4 first-line:p-2 flex mx-auto text-white bg-[#0052CC] border-0 py-2 px-8 focus:outline-none hover:bg-[#487fd1] rounded text-lg" type="submit">質問する</button>
+              </form>
+            </div>
+          </div>
+          <div class="min-h-56 px-4">
+            <div id="result" class="my-2 mx-2 h-56"></div>
+          </div>
+          <!-- <div class="p-2 w-full pt-4 mt-8 border-t border-gray-200 text-center">
+            <p class="leading-normal">お問い合わせはこちら</p>
+            <a class="text-[#0052CC]">example@email.com</a><br>
+            <span class="inline-flex">
+            </span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <img src="{{ url_for('static', filename='hatena.svg') }}" class="icon" /> -->
+  <!-- <h3 class="font-bold">ショップチャンネル様FAQ</h3>
+  <div>質問を入力してください。<br>FAQに登録されている内容に基づいて回答が可能です。</div><br>
+  <div>質問例<br>パスワードがわかりません<br>送料はいくらですか<br>裾上げしたいです</div><br> -->
+  <!-- <form id="animal-form">
+    <input type="text" name="animal" placeholder="パスワードがわかりません" required />
+    <button class="c-button" type="submit">質問する</button>
+  </form> -->
+ 
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
